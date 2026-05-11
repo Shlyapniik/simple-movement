@@ -19,10 +19,20 @@ public class RoundManager : MonoBehaviour
     public TextMeshProUGUI gameResultText;
 
     public GameObject endGamePanel;
+    public AudioSource audioSource;
+    public AudioClip winSound;
+
+    private Rigidbody rb;
+
+    private void Start()
+    {
+        Time.timeScale = 1f;
+        rb = player.GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
-        if (roundText.IsActive())
+        if (roundText.gameObject.activeSelf)
         {
             textTime+=Time.deltaTime;
             if (textTime >= 3f)
@@ -35,7 +45,6 @@ public class RoundManager : MonoBehaviour
     public void CollectItem()
     {
         collectedItems++;
-
         countText.text = $"Count: {collectedItems}";
 
         CheckRoundCondition();
@@ -51,6 +60,7 @@ public class RoundManager : MonoBehaviour
 
     public void NextRound()
     {
+        collectedItems = 0;
         currentRound++;
 
         if (currentRound >= spawnPoints.Length)
@@ -61,24 +71,27 @@ public class RoundManager : MonoBehaviour
 
         textTime = 0f;
         roundText.gameObject.SetActive(true);
-        roundText.text = $"Round {currentRound+1} ended.\n Round {currentRound+2} starts.";
+        roundText.text = $"Round {currentRound} ended.\n Round {currentRound+1} starts.";
         player.position = spawnPoints[currentRound].position;
-
-        Rigidbody rb = player.GetComponent<Rigidbody>();
+        
         rb.linearVelocity = Vector3.zero;
     }
 
     public void WinGame()
     {
-        Time.timeScale = 0f;
-        endGamePanel.SetActive(true);
-        gameResultText.text = "Congratulations!\n You win the game!";
+        EndGame("Congratulations!\n You win the game!");
+        audioSource.PlayOneShot(winSound);
     }
 
     public void LoseGame()
     {
+        EndGame("You lose the game\n Try again?");
+    }
+
+    private void EndGame(string endText)
+    {
         Time.timeScale = 0f;
         endGamePanel.SetActive(true);
-        gameResultText.text = "You lose the game\n Try again?";
+        gameResultText.text = endText;
     }
 }
