@@ -5362,7 +5362,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &841154067
@@ -14264,6 +14264,14 @@ PrefabInstance:
     - target: {fileID: 4063270116994080377, guid: 3432a6b471b384e44af688dbc812ce0b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410915784017704309, guid: 3432a6b471b384e44af688dbc812ce0b, type: 3}
+      propertyPath: m_LinearDamping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410915784017704309, guid: 3432a6b471b384e44af688dbc812ce0b, type: 3}
+      propertyPath: m_AngularDamping
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4444857389301596865, guid: 3432a6b471b384e44af688dbc812ce0b, type: 3}
       propertyPath: m_LocalPosition.x

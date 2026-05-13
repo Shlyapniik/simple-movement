@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-        rb.AddForce(movement * speed);
+        rb.AddForce(movement * speed, ForceMode.Acceleration);
+        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, 8f);
     }
 
     public void OnMove(InputValue movementValue)
